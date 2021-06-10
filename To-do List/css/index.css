@@ -1,0 +1,230 @@
+svg {
+  cursor: pointer;
+}
+
+p {
+  margin: 0;
+}
+
+.header {
+  height: 2rem;
+  border-radius: 0.15rem 0.15rem 0 0;
+  background: url("../img/bg.jpg") no-repeat 50% 70%;
+  background-size: cover;
+  position: relative;
+}
+
+.header .refresh {
+  position: absolute;
+  width: 0.28rem;
+  height: 0.28rem;
+  right: 0.2rem;
+  top: 0.2rem;
+  -webkit-transition: all .2s;
+  transition: all .2s;
+  color: white;
+}
+
+.header .refresh:hover {
+  -webkit-transform: rotate(40deg);
+          transform: rotate(40deg);
+}
+
+.header .date {
+  position: absolute;
+  left: 0.10rem;
+  bottom: 0.10rem;
+  font-size: 0.25rem;
+  color: white;
+  font-weight: bold;
+}
+
+.content {
+  position: relative;
+  padding-top: 0.55rem;
+}
+
+.content .task-status {
+  position: absolute;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  top: 0;
+  left: 0;
+  right: 0;
+  border-bottom: 0.01rem solid #8d8d88;
+  -webkit-box-shadow: 0px 0.03rem 0.05rem #9d9d9d;
+          box-shadow: 0px 0.03rem 0.05rem #9d9d9d;
+}
+
+.content .task-status > p {
+  -webkit-box-flex: 0;
+      -ms-flex: 0 1 33.33%;
+          flex: 0 1 33.33%;
+  text-align: center;
+  height: 0.55rem;
+  line-height: 0.55rem;
+  letter-spacing: 0.03rem;
+  font-size: 0.2rem;
+  cursor: pointer;
+}
+
+.content .current {
+  background: #F17;
+  color: #fff;
+}
+
+.content .task {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  border-bottom: 0.01rem solid rgba(0, 0, 0, 0.1);
+  padding: 0.16rem 0.1rem;
+  height: 0.1rem;
+}
+
+.content .task-list {
+  overflow: auto;
+  height: 3.5rem;
+}
+
+.content .undone, .content .done {
+  cursor: pointer;
+  -webkit-box-flex: 1;
+      -ms-flex: 1 0 auto;
+          flex: 1 0 auto;
+  width: 0.2rem;
+  height: 0.2rem;
+  border-radius: 9.99rem;
+}
+
+.content .undone {
+  border: 0.02rem solid #000;
+}
+
+.content .done {
+  background-color: #6eb200;
+  border: 0.02rem solid #6eb200;
+  text-align: center;
+}
+
+.content .done svg {
+  width: 0.15rem;
+  height: 0.15rem;
+  line-height: 0.2rem;
+}
+
+.content .task-content {
+  width: 4.7rem;
+  padding: 0 0.1rem;
+  font-size: 0.2rem;
+/*  height: 2rem; */
+}
+
+.content .task-content .editTask {
+  width: 92%;
+  height: 0.2rem;
+  border-radius: 0.05rem;
+  border: 0.01rem solid #bdbd;
+  outline: none;
+  font-size: 0.18rem;
+  padding: 0.05rem 0.1rem;
+}
+
+.content .line-through {
+  text-decoration: line-through;
+  color: rgba(0, 0, 0, 0.1);
+}
+
+.content .delete-icon {
+  width: 0.2rem;
+  height: 0.1rem;
+}
+
+.content .delete-icon svg {
+  vertical-align: bottom;
+  -webkit-transition: fill .2s;
+  transition: fill .2s;
+}
+
+.content .delete-icon svg:hover {
+  fill: #f00;
+}
+
+.add-task {
+  height: 0.6rem;
+  border-top: 0.01rem solid rgba(0, 0, 0, 0.1);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.add-task .plus {
+  width: 0.4rem;
+  height: 0.4rem;
+  margin-left: 0.1rem;
+  border-radius: 9.99rem;
+  background-color: #4162f6;
+  text-align: center;
+  line-height: 0.37rem;
+  color: white;
+}
+
+.add-task .plus svg {
+  width: 0.3rem;
+  height: 0.3rem;
+  vertical-align: middle;
+}
+
+.add-task .input-task {
+  width: 88%;
+  margin-left: 0.1rem;
+}
+
+.add-task .input-task input[type="text"] {
+  width: 95%;
+  height: 0.35rem;
+  border: none;
+  font-size: 0.2rem;
+  padding: 0.05rem;
+  border: 0.01rem solid #dedede;
+  border-radius: 0.05rem;
+}
+
+.add-task .input-task input[type="text"]::-webkit-input-placeholder {
+  color: #4162f6;
+  font-size: 0.2rem;
+}
+
+.add-task .input-task input[type="text"]:-ms-input-placeholder {
+  color: #4162f6;
+  font-size: 0.2rem;
+}
+
+.add-task .input-task input[type="text"]::-ms-input-placeholder {
+  color: #4162f6;
+  font-size: 0.2rem;
+}
+
+.add-task .input-task input[type="text"]::placeholder {
+  color: #4162f6;
+  font-size: 0.2rem;
+}
+
+body {
+  background-color: rgba(0, 0, 0, 0.1);
+  height: 100vh;
+}
+
+.container {
+  margin: 0 auto;
+  width: 5rem;
+  background-color: white;
+  border-radius: 0.15rem 0.15rem 0 0;
+}
