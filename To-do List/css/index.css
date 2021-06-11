@@ -1,230 +1,94 @@
-svg {
-  cursor: pointer;
+body {
+	background: #2C2828;
+	text-align: center;
 }
 
-p {
-  margin: 0;
-}
 
 .header {
-  height: 2rem;
-  border-radius: 0.15rem 0.15rem 0 0;
-  background: url("../img/bg.jpg") no-repeat 50% 70%;
-  background-size: cover;
-  position: relative;
+	font-size: 0.8rem;
+	font-family: "Georgia";
+	font-weight: bold;
+	color: white;
+	/* text-align: center; */
+	margin-top: 0.4375rem;
+	margin-left: 0.625rem;
 }
 
-.header .refresh {
-  position: absolute;
-  width: 0.28rem;
-  height: 0.28rem;
-  right: 0.2rem;
-  top: 0.2rem;
-  -webkit-transition: all .2s;
-  transition: all .2s;
-  color: white;
+#delete-icon {
+	vertical-align: middle;
+	float: right;
+	margin-right: 0.625rem;
+	height: 1.0rem;
+	width: 1.0rem;
 }
 
-.header .refresh:hover {
-  -webkit-transform: rotate(40deg);
-          transform: rotate(40deg);
+.lists {
+	width: 95%;
+	margin: 0 auto;
+	padding-top: 0.3125rem;
+	padding-bottom: 0.3125rem;
 }
 
-.header .date {
-  position: absolute;
-  left: 0.10rem;
-  bottom: 0.10rem;
-  font-size: 0.25rem;
-  color: white;
-  font-weight: bold;
+#special-list {
+	margin-top: 0.625rem;
+	border-top: 0.0625rem solid rgba(255, 255, 255, 0.3);
+	border-bottom: 0.0625rem solid rgba(255, 255, 255, 0.3);
 }
 
-.content {
-  position: relative;
-  padding-top: 0.55rem;
+.list {
+	font-size: 0.6rem;
+	font-family: "Book Antiqua";
+	font-weight: 700;
+	color: white;
+	height: 1.4rem;
+	line-height: 1.4rem;
+	text-align: left;
+	padding-top: 0.125rem;
+	padding-bottom: 0.125rem;
 }
 
-.content .task-status {
-  position: absolute;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  top: 0;
-  left: 0;
-  right: 0;
-  border-bottom: 0.01rem solid #8d8d88;
-  -webkit-box-shadow: 0px 0.03rem 0.05rem #9d9d9d;
-          box-shadow: 0px 0.03rem 0.05rem #9d9d9d;
+.icon {
+	vertical-align: middle;
+	display: inline-block;
+	max-width: 100%;
+	height: 1.0rem;
+	width: 1.0rem;
 }
 
-.content .task-status > p {
-  -webkit-box-flex: 0;
-      -ms-flex: 0 1 33.33%;
-          flex: 0 1 33.33%;
-  text-align: center;
-  height: 0.55rem;
-  line-height: 0.55rem;
-  letter-spacing: 0.03rem;
-  font-size: 0.2rem;
-  cursor: pointer;
+.list-name {
+	display: inline-block;
+	margin-left: 0.5rem;
+	font-size: 0.7rem;
 }
 
-.content .current {
-  background: #F17;
-  color: #fff;
+.list-size {
+	display: inline-block;
+	float: right;
+	margin-right: 1.0625rem;
 }
 
-.content .task {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  border-bottom: 0.01rem solid rgba(0, 0, 0, 0.1);
-  padding: 0.16rem 0.1rem;
-  height: 0.1rem;
+.footer {
+	font-size: 0.6rem;
+	position: absolute;
+	color: white;
+	text-align: center;
+	width: 92%;
+	border-top: 0.0625rem solid rgba(255, 255, 255, 0.3);
+	padding-top: 0.1875rem;
+
+	left: 0;
+	right: 0;
+	bottom: 1rem;
+	margin: auto;
 }
 
-.content .task-list {
-  overflow: auto;
-  height: 3.5rem;
+.footer form {
+	display: inline-block;
+	width: 80%;
+	height: 90%;
 }
 
-.content .undone, .content .done {
-  cursor: pointer;
-  -webkit-box-flex: 1;
-      -ms-flex: 1 0 auto;
-          flex: 1 0 auto;
-  width: 0.2rem;
-  height: 0.2rem;
-  border-radius: 9.99rem;
-}
-
-.content .undone {
-  border: 0.02rem solid #000;
-}
-
-.content .done {
-  background-color: #6eb200;
-  border: 0.02rem solid #6eb200;
-  text-align: center;
-}
-
-.content .done svg {
-  width: 0.15rem;
-  height: 0.15rem;
-  line-height: 0.2rem;
-}
-
-.content .task-content {
-  width: 4.7rem;
-  padding: 0 0.1rem;
-  font-size: 0.2rem;
-/*  height: 2rem; */
-}
-
-.content .task-content .editTask {
-  width: 92%;
-  height: 0.2rem;
-  border-radius: 0.05rem;
-  border: 0.01rem solid #bdbd;
-  outline: none;
-  font-size: 0.18rem;
-  padding: 0.05rem 0.1rem;
-}
-
-.content .line-through {
-  text-decoration: line-through;
-  color: rgba(0, 0, 0, 0.1);
-}
-
-.content .delete-icon {
-  width: 0.2rem;
-  height: 0.1rem;
-}
-
-.content .delete-icon svg {
-  vertical-align: bottom;
-  -webkit-transition: fill .2s;
-  transition: fill .2s;
-}
-
-.content .delete-icon svg:hover {
-  fill: #f00;
-}
-
-.add-task {
-  height: 0.6rem;
-  border-top: 0.01rem solid rgba(0, 0, 0, 0.1);
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-}
-
-.add-task .plus {
-  width: 0.4rem;
-  height: 0.4rem;
-  margin-left: 0.1rem;
-  border-radius: 9.99rem;
-  background-color: #4162f6;
-  text-align: center;
-  line-height: 0.37rem;
-  color: white;
-}
-
-.add-task .plus svg {
-  width: 0.3rem;
-  height: 0.3rem;
-  vertical-align: middle;
-}
-
-.add-task .input-task {
-  width: 88%;
-  margin-left: 0.1rem;
-}
-
-.add-task .input-task input[type="text"] {
-  width: 95%;
-  height: 0.35rem;
-  border: none;
-  font-size: 0.2rem;
-  padding: 0.05rem;
-  border: 0.01rem solid #dedede;
-  border-radius: 0.05rem;
-}
-
-.add-task .input-task input[type="text"]::-webkit-input-placeholder {
-  color: #4162f6;
-  font-size: 0.2rem;
-}
-
-.add-task .input-task input[type="text"]:-ms-input-placeholder {
-  color: #4162f6;
-  font-size: 0.2rem;
-}
-
-.add-task .input-task input[type="text"]::-ms-input-placeholder {
-  color: #4162f6;
-  font-size: 0.2rem;
-}
-
-.add-task .input-task input[type="text"]::placeholder {
-  color: #4162f6;
-  font-size: 0.2rem;
-}
-
-body {
-  background-color: rgba(0, 0, 0, 0.1);
-  height: 100vh;
-}
-
-.container {
-  margin: 0 auto;
-  width: 5rem;
-  background-color: white;
-  border-radius: 0.15rem 0.15rem 0 0;
+#add-list {
+	width: 70%;
+	height: 90%;
 }
