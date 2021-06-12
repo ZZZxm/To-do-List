@@ -1,0 +1,94 @@
+body {
+	background: #2C2828;
+	text-align: center;
+}
+
+
+.header {
+	font-size: 0.8rem;
+	font-family: "Georgia";
+	font-weight: bold;
+	color: white;
+	/* text-align: center; */
+	margin-top: 0.4375rem;
+	margin-left: 0.625rem;
+}
+
+#delete-icon {
+	vertical-align: middle;
+	float: right;
+	margin-right: 0.625rem;
+	height: 1.0rem;
+	width: 1.0rem;
+}
+
+.lists {
+	width: 95%;
+	margin: 0 auto;
+	padding-top: 0.3125rem;
+	padding-bottom: 0.3125rem;
+}
+
+#special-list {
+	margin-top: 0.625rem;
+	border-top: 0.0625rem solid rgba(255, 255, 255, 0.3);
+	border-bottom: 0.0625rem solid rgba(255, 255, 255, 0.3);
+}
+
+.list {
+	font-size: 0.6rem;
+	font-family: "Book Antiqua";
+	font-weight: 700;
+	color: white;
+	height: 1.4rem;
+	line-height: 1.4rem;
+	text-align: left;
+	padding-top: 0.125rem;
+	padding-bottom: 0.125rem;
+}
+
+.icon {
+	vertical-align: middle;
+	display: inline-block;
+	max-width: 100%;
+	height: 1.0rem;
+	width: 1.0rem;
+}
+
+.list-name {
+	display: inline-block;
+	margin-left: 0.5rem;
+	font-size: 0.7rem;
+}
+
+.list-size {
+	display: inline-block;
+	float: right;
+	margin-right: 1.0625rem;
+}
+
+.footer {
+	font-size: 0.6rem;
+	position: absolute;
+	color: white;
+	text-align: center;
+	width: 92%;
+	border-top: 0.0625rem solid rgba(255, 255, 255, 0.3);
+	padding-top: 0.1875rem;
+
+	left: 0;
+	right: 0;
+	bottom: 1rem;
+	margin: auto;
+}
+
+.footer form {
+	display: inline-block;
+	width: 80%;
+	height: 90%;
+}
+
+#add-list {
+	width: 70%;
+	height: 90%;
+}

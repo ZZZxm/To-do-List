@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<link rel="stylesheet" href="./css/index.css">
+		<title></title>
+		<script src="js/screen_adaptation.js"></script>
+	</head>
+	<body>
+		<div id="title" class="header">
+			To-do List
+			<img src="img/delete-all.png" id="delete-icon">
+		</div>
+		<div id="special-list" class="lists">
+			<div id="My day" class="list">
+				<img src="img/myday.png" class="icon" >
+				<div class="list-name">
+					My Day
+				</div>
+				<div class="list-size">
+					1
+				</div>
+			</div>
+			<div id="Important" class="list">
+				<img src="img/star-empty.png" class="icon" >
+				<div class="list-name">
+					Important
+				</div>
+				<div class="list-size">
+					1
+				</div>
+			</div>
+			<div id="Finished" class="list">
+				<img src="img/finish.png" class="icon">
+				<div class="list-name">
+					Finished
+				</div>
+				<div class="list-size">
+					1
+				</div>
+			</div>
+		</div>
+		
+		<div id="self-list" class="lists">
+			<div id="Study" class="list">
+				<img src="img/list-icon.png" class="icon">
+				<div class="list-name">
+					Study
+				</div>
+				<div class="list-size">
+					1
+				</div>
+			</div>
+		</div>
+		
+		<div class="footer">
+<!-- 			<img src="img/delete-all.png" class="icon"> -->
+			<input type="text" id="add-list" placeholder="Add a todo list..."/>
+			<input type="submit" id="add-btn" value="Add List"/>
+		</div>
+	</body>
+	<script src="./js/index.js"></script>
+</html>

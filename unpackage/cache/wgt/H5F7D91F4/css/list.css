@@ -1,0 +1,70 @@
+body {
+	background: #2C2828;
+	text-align: center;
+}
+
+h1, div {
+    color: white;
+}
+
+header {
+	text-align: left;
+}
+
+header img {
+	margin-left: 0.8125rem;
+	margin-top: 0.625rem;
+}
+
+h1 {
+	margin: 0.625rem;
+	font-family: "Georgia";
+}
+
+#list-num {
+	font-size: 0.875rem;
+	margin-bottom: 0.625rem;
+	font-family: "Book Antiqua";
+}
+
+.items {
+	width: 95%;
+	margin: 0 auto;
+}
+
+.item {
+	height: 1.4rem;
+	line-height: 1.4rem;
+	vertical-align: center;
+	color: white;
+	text-align: left;
+	display: flex;
+	align-items: center;
+	padding-left: 0.625rem;
+	margin-bottom: 15px;
+}
+
+.item-name {
+	display: inline-block;
+	font-family: "Book Antiqua";
+	font-size: 0.8rem;
+	margin-left: 0.9375rem;
+	width: 75%;
+}
+
+.finish-icon {
+	vertical-align: middle;
+	height: 1rem;
+	width: 1rem;
+	margin-right: 0.625rem;
+}
+
+.del {
+	display: inline-block;
+}
+
+.del-icon {
+	vertical-align: middle;
+	height: 1rem;
+	width: 1rem;
+}
