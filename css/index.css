@@ -36,16 +36,16 @@ body {
 }
 
 .list {
-	font-size: 0.6rem;
-	font-family: "Book Antiqua";
+	font-size: 0.8rem;
+	font-family: "Book Antiqua";	
 	font-weight: 700;
 	color: white;
 	height: 1.4rem;
 	line-height: 1.4rem;
 	text-align: left;
-	padding-top: 0.125rem;
-	padding-bottom: 0.125rem;
-	    transition: .4s;
+	padding-top: 0.3rem;
+	padding-bottom: 0.5rem;
+	transition: .4s;
 }
 
 .icon {
@@ -102,7 +102,7 @@ body {
     outline: none;
     /* box-sizing: border-box; */
     padding-left: 0.9375rem;
-    font-size: 1.0rem;
+    font-size: 0.8rem;
 	font-family: "Book Antiqua";
     background-color: rgba(255, 255, 255, 0.4);
     border-radius: 2.8125rem;
@@ -124,6 +124,6 @@ body {
 
 #self-list {
 	margin-top: 0.3125rem;
-	height: 7.5rem;
+	height: 9.7rem;
 	overflow: auto;	
 }

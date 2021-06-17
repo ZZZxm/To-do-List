@@ -43,8 +43,36 @@ document.ready(function() {
 		window.location.href = "index.html";
 	}
 	
-	var items = document.getElementsByClassName("item-name");
+
+	
+	initItemIcon();
 })
 
+// 初始化每项事项的图标按钮事件
+function initItemIcon() {
+	var finishDiv = document.getElementsByClassName("fin-div");
+	
+	// 完成图标
+	for (i = 0; i < finishDiv.length; i++) {
+		let icon = finishDiv[i].getElementsByTagName("img");
+		let itemName = finishDiv[i].nextElementSibling;
+		console.log(itemName);
+		finishDiv[i].onclick = function() {
+			console.log(111);
+			if (icon[0].getAttribute("src", 2) == "img/finish-no.png") {
+				icon[0].setAttribute("src", "img/finish-yes.png");
+				itemName.setAttribute("class", "item-name item-name-finish");
+			}
+			else {
+				icon[0].setAttribute("src", "img/finish-no.png");
+				itemName.setAttribute("class", "item-name");
+			}
+		}
+	}
+	
+	var starDiv = document.getElementsByClassName("")
+}
+
 // 记得 event.stopPropagation();
+
 

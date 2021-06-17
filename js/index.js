@@ -125,3 +125,4 @@ function listGenerator(obj) {
 	`;
 }
 
+// 下拉框的长度要设置成屏幕长度的某个比例
