@@ -33,6 +33,15 @@ document.ready(function() {
 	// 根据localStorage生成列表
 	renderLists();
 	
+	var screenHeight = window.innerHeight;
+	var selfList = document.getElementById("self-list");
+	var upperHeight = document.getElementById("special-list").offsetHeight + 
+		document.getElementById("title").offsetHeight;
+	console.log(screenHeight);
+	console.log(upperHeight);
+	selfList.style.height = (screenHeight - upperHeight) + "px";
+	
+	// 按钮添加列表事件
 	document.querySelector('#add-btn')
 		.addEventListener('click', addList);
 })

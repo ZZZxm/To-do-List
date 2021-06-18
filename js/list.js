@@ -68,6 +68,18 @@ function initItemIcon() {
 				itemName.setAttribute("class", "item-name");
 			}
 		}
+		
+		itemName.onclick = function() {
+			console.log(111);
+			if (icon[0].getAttribute("src", 2) == "img/finish-no.png") {
+				icon[0].setAttribute("src", "img/finish-yes.png");
+				itemName.setAttribute("class", "item-name item-name-finish");
+			}
+			else {
+				icon[0].setAttribute("src", "img/finish-no.png");
+				itemName.setAttribute("class", "item-name");
+			}
+		}
 	}
 	
 	var starDiv = document.getElementsByClassName("")

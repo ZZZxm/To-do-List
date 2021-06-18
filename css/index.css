@@ -92,6 +92,7 @@ body {
 	right: 0;
 	bottom: 0.3rem;
 	margin: auto;
+	margin-bottom: 0.5rem;
 }
 
 #add-list {
@@ -124,6 +125,6 @@ body {
 
 #self-list {
 	margin-top: 0.3125rem;
-	height: 9.7rem;
+	height: auto;
 	overflow: auto;	
 }
