@@ -20,6 +20,12 @@
        }, 0);
     };
  })();
+ 
+
+var todoLists = JSON.parse(localStorage.getItem("todoLists")) || [];
+// 每一项todo事项存储
+var todoItems = JSON.parse(localStorage.getItem("todoItems")) || [];
+
 
 function getParams(key) {
     var reg = new RegExp("(^|&)" + key + "=([^&]*)(&|$)");
@@ -31,60 +37,240 @@ function getParams(key) {
 };
 
 document.ready(function() {
-    var listName = getParams("listname");
+    let listName = getParams("listname");
     console.log(listName);
-    var title = document.querySelector("h1");
+    let title = document.querySelector("h1");
     console.log(title);
     title.innerText = listName;
     title.style = "display=block;";
 	
+	// 返回初始界面
 	var ret = document.getElementById("ret-icon");
 	ret.onclick = function() {
 		window.location.href = "index.html";
 	}
 	
-
+	renderList();
 	
-	initItemIcon();
+	// 添加item按钮
+	document.querySelector('#add-btn')
+		.addEventListener('click', addItem);
+		
+	// 删除已完成
+	document.querySelector('#del-all-icon')
+		.addEventListener('click', deleteFinish);
 })
 
 // 初始化每项事项的图标按钮事件
-function initItemIcon() {
-	var finishDiv = document.getElementsByClassName("fin-div");
+function addListener() {
+	var finishDiv = document.querySelectorAll('.fin-div');
+	finishDiv.forEach(d => d.addEventListener('click', itemStatusChange))
 	
-	// 完成图标
-	for (i = 0; i < finishDiv.length; i++) {
-		let icon = finishDiv[i].getElementsByTagName("img");
-		let itemName = finishDiv[i].nextElementSibling;
-		console.log(itemName);
-		finishDiv[i].onclick = function() {
-			console.log(111);
-			if (icon[0].getAttribute("src", 2) == "img/finish-no.png") {
-				icon[0].setAttribute("src", "img/finish-yes.png");
-				itemName.setAttribute("class", "item-name item-name-finish");
-			}
-			else {
-				icon[0].setAttribute("src", "img/finish-no.png");
-				itemName.setAttribute("class", "item-name");
-			}
-		}
-		
-		itemName.onclick = function() {
-			console.log(111);
-			if (icon[0].getAttribute("src", 2) == "img/finish-no.png") {
-				icon[0].setAttribute("src", "img/finish-yes.png");
-				itemName.setAttribute("class", "item-name item-name-finish");
-			}
-			else {
-				icon[0].setAttribute("src", "img/finish-no.png");
-				itemName.setAttribute("class", "item-name");
-			}
-		}
-	}
+	var nameDiv = document.querySelectorAll('.item-name');
+	nameDiv.forEach(d => d.addEventListener('click', itemStatusChange));
 	
-	var starDiv = document.getElementsByClassName("")
+	var delDiv = document.querySelectorAll('.del-div');
+	delDiv.forEach(d => d.addEventListener('click', deleteItem));
+	
+	var starDiv = document.querySelectorAll('.star-div');
+	starDiv.forEach(d => d.addEventListener('click', addImportant));
 }
 
-// 记得 event.stopPropagation();
+// 改变todo事项状态
+function itemStatusChange(e) {
+	e.stopPropagation();
+	let parNode = e.currentTarget.parentNode;
+		
+	let itemid = parNode.getAttribute("id");
+	let itemname = parNode.getAttribute("name");
+	console.log(itemname);
+	let finish = todoItems.find(item => item.id == itemid);
+	console.log(finish);
+		
+	if (finish.finish == true) {
+		finish.finish = false;
+	} else {
+		finish.finish = true;
+	}
+	localStorage.setItem("todoItems", JSON.stringify(todoItems));
+	renderList();
+}
+
+// 删除todo事项
+function deleteItem(e) {
+	e.stopPropagation();
+	let parNode = e.currentTarget.parentNode;
+	if (!confirm("Are you sure to delete \"" + parNode.getAttribute('name') + "\"?")) {
+		return;
+	}
+	
+	let itemid = parNode.getAttribute("id");
+	let item = todoItems.find(item => item.id == itemid);
+	let index = todoItems.indexOf(item);
+	todoItems.splice(index, 1);
+	localStorage.setItem("todoItems", JSON.stringify(todoItems));
+	renderList();
+}
+
+// 添加todo事项
+function addItem() {
+	let item = document.getElementById("add-item").value;
+	if (item == "") {
+		return;
+	}
+	
+	let time = document.getElementById("data-sel").value;
+	let listid = getParams("listid");
+	
+	let itemObj = {
+		id: getUniqueId(),
+		name: item,
+		listid: listid,
+		endtime: time,
+		finish: false,
+		important: false
+	};
+	
+	todoItems.push(itemObj);
+	document.getElementById("add-item").value = "";
+	localStorage.setItem("todoItems", JSON.stringify(todoItems));
+	renderList();
+}
+
+// 删除所有已完成的事项
+function deleteFinish() {
+	if (!confirm("Are you sure to delete all completed tasks in \""
+		+ getParams("listname") + " \"?")) {
+		return;
+	}
+	
+	var listid = getParams("listid");
+	console.log("asdasdas");
+	todoItems = todoItems.filter(function (item) {
+		return item.finish == false || !item.listid == listid;
+	})
+	localStorage.setItem("todoItems", JSON.stringify(todoItems));
+	renderList();
+}
+
+function getUniqueId() {
+	return (Date.now && Date.now()) || new Date().getTime();
+}
+
+// 添加到重要列表
+function addImportant(e) {
+	e.stopPropagation();
+	let parNode = e.currentTarget.parentNode;
+	
+	let itemid = parNode.getAttribute("id");
+	let item = todoItems.find(item => item.id == itemid);
+	if (item.important == true) {
+		item.important = false;
+	} else {
+		item.important = true;
+	}
+	localStorage.setItem("todoItems", JSON.stringify(todoItems));
+	renderList();
+}
+
+
+// 重新绘制列表
+function renderList() {
+	if (renderSpecialList()) {
+		return;
+	}
+	
+	refreshList();
+	const itemView = document.querySelector('.items');
+	var listid = getParams("listid");
+	
+	notfinish = todoItems.filter(item => item.listid == listid && item.finish === false);
+	notfinish.sort(itemCompare("endtime"));
+	
+	finish = todoItems.filter(item => item.listid == listid && item.finish === true);
+	finish.sort(itemCompare("endtime"));
+	
+	itemView.innerHTML = notfinish.map(obj => itemGenerator(obj)).join('')
+							+ finish.map(obj => itemGenerator(obj)).join('');
+	
+	checkFinish();
+	addListener();
+	var listSize = notfinish.length;
+	document.getElementById("list-num").innerHTML = listSize + " items left";
+}
+
+// 更新分类列表的localStorage
+function refreshList() {
+	var listid = getParams("listid");
+	let notfinish = todoItems.filter(item => item.listid == listid && item.finish === false);
+	let list = todoLists.find(list => list.id == listid);
+	list.num = notfinish.length;
+	localStorage.setItem("todoLists", JSON.stringify(todoLists));
+}
+
+function renderSpecialList() {
+	var listid = getParams("listid");
+	
+	if (listid == 2) {
+		console.log(123213124123123);
+		return true;
+	}
+	return false;
+}
+
+function itemCompare(attr) {
+	return function(obj1, obj2) {
+		var val1 = obj1[attr];
+		var val2 = obj2[attr];
+		if (val1 > val2) {
+			return 1;
+		} else if (val1 < val2) {
+			return -1;
+		} else {
+			return 0;
+		}
+	}
+}
+
+function itemGenerator(obj) {
+	return `
+	<div class="item" id=${obj.id} name=${obj.name} finish=${obj.finish}
+			important=${obj.important}>
+		<div class="fin-div">
+			<img src="img/finish-no.png">
+		</div>
+		<div class="item-name">
+			${obj.name}
+		</div>
+		<div class="star-div">
+			<img src="img/star-empty64.png" class="icon" id="star-icon">
+		</div>
+		<div class="del-div">
+			<img src="img/delete.png" class="icon" id="del-icon">
+		</div>
+		<div id="end-date">
+			End date: ${obj.endtime}
+		</div>
+	</div>
+	`;
+}
+
+function checkFinish() {
+	var items = document.getElementsByClassName("item");
+	for (i = 0; i < items.length; i++) {
+		if (items[i].getAttribute("finish") == "true") {
+			let icon = items[i].getElementsByClassName("fin-div")[0].getElementsByTagName("img");
+			let itemName = items[i].getElementsByClassName("item-name");
+			
+			icon[0].setAttribute("src", "img/finish-yes.png");
+			itemName[0].setAttribute("class", "item-name item-name-finish");
+		}
+		
+		if (items[i].getAttribute("important") == "true") {
+			let iconStar = items[i].getElementsByClassName("star-div")[0].getElementsByTagName("img");
+			iconStar[0].setAttribute("src", "img/star-full64.png");
+		}
+	}
+}
 
 

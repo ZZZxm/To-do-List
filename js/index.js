@@ -3,7 +3,8 @@
 // @Param
 // 		name: 列表名称
 //		num: 列表所含待办事项数量
-const todoLists = JSON.parse(localStorage.getItem("todoLists")) || [];
+var todoLists = JSON.parse(localStorage.getItem("todoLists")) || [];
+var todoItems = JSON.parse(localStorage.getItem("todoItems")) || [];
 
 // 原生js实现document.ready
 (function () {
@@ -33,13 +34,13 @@ document.ready(function() {
 	// 根据localStorage生成列表
 	renderLists();
 	
-	var screenHeight = window.innerHeight;
-	var selfList = document.getElementById("self-list");
-	var upperHeight = document.getElementById("special-list").offsetHeight + 
-		document.getElementById("title").offsetHeight;
-	console.log(screenHeight);
-	console.log(upperHeight);
-	selfList.style.height = (screenHeight - upperHeight) + "px";
+	// var screenHeight = window.innerHeight;
+	// var selfList = document.getElementById("self-list");
+	// var upperHeight = document.getElementById("special-list").offsetHeight + 
+	// 	document.getElementById("title").offsetHeight;
+	// console.log(screenHeight);
+	// console.log(upperHeight);
+	// selfList.style.height = (screenHeight - upperHeight) + "px";
 	
 	// 按钮添加列表事件
 	document.querySelector('#add-btn')
@@ -67,9 +68,11 @@ function addListenerToList() {
 	var lists = document.getElementsByClassName("list");
 	for (i = 0; i < lists.length; i++) {
 	    let listName = lists[i].id;
+		let listid = lists[i].getAttribute("uni-id");
 	    console.log(listName);
 	    lists[i].onclick = function() {
-	        window.location.href = "list.html?listname="+listName;
+	        window.location.href = "list.html?listname="+listName
+				+"&listid="+listid;
 	    }
 	}
 	
@@ -114,6 +117,11 @@ function deleteList(e) {
 	let index = todoLists.indexOf(targetList);
 	todoLists.splice(index, 1);
 	localStorage.setItem("todoLists", JSON.stringify(todoLists));
+	
+	todoItems = todoItems.filter(function (item) {
+		return !(item.listid == listId);
+	})
+	localStorage.setItem("todoItems", JSON.stringify(todoItems));
 	renderLists();
 }
 

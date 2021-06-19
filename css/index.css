@@ -66,6 +66,8 @@ body {
 	display: inline-block;
 	float: right;
 	margin-right: 1.0625rem;
+	font-size: 0.6rem;
+	color: coral;
 }
 
 .del {
@@ -125,6 +127,6 @@ body {
 
 #self-list {
 	margin-top: 0.3125rem;
-	height: auto;
+	height: 9.0rem;
 	overflow: auto;	
 }
