@@ -45,6 +45,9 @@ document.ready(function() {
 	// 按钮添加列表事件
 	document.querySelector('#add-btn')
 		.addEventListener('click', addList);
+	
+	document.querySelector('#del-all-icon')
+		.addEventListener('click', deleteFinish);
 })
 
 // 每次列表有更新时，重新生成列表
@@ -58,6 +61,16 @@ function renderLists() {
 		if (sizes[i].innerText == "0") {
 			sizes[i].style.display = "none";
 		}
+	}
+	
+	// Important列表
+	var impList = document.getElementById("Important");
+	var impNum = impList.getElementsByClassName("list-size");
+	var impFilter = todoItems.filter(item => item.important == true && item.finish == false);
+	console.log(impFilter);
+	impNum[0].innerHTML = impFilter.length;
+	if (impFilter.length == 0) {
+		impNum[0].style.display = "none";
 	}
 	
 	addListenerToList();
@@ -125,6 +138,19 @@ function deleteList(e) {
 	renderLists();
 }
 
+// 删除所有已完成todo事项
+function deleteFinish() {
+	if (!confirm("Are you sure to delete all completed tasks?")) {
+		return;
+	}
+
+	todoItems = todoItems.filter(function (item) {
+		return item.finish == false;
+	})
+	localStorage.setItem("todoItems", JSON.stringify(todoItems));
+	renderLists();
+}
+
 function listGenerator(obj) {
 	return `
 	<div id="${obj.name}" class="list" uni-id="${obj.id}">
@@ -141,5 +167,8 @@ function listGenerator(obj) {
 	</div>
 	`;
 }
+
+
+
 
 // 下拉框的长度要设置成屏幕长度的某个比例

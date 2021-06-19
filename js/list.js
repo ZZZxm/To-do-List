@@ -85,13 +85,23 @@ function itemStatusChange(e) {
 	let itemname = parNode.getAttribute("name");
 	console.log(itemname);
 	let finish = todoItems.find(item => item.id == itemid);
-	console.log(finish);
+	//console.log(finish);
+		
+		
+	listName = todoLists.find(list => list.id == finish.listid);
 		
 	if (finish.finish == true) {
 		finish.finish = false;
+		
+		// 事项所在列表的未完成数加一
+		listName.num++;
 	} else {
 		finish.finish = true;
+		
+		// 事项所在列表的未完成数减一
+		listName.num--;
 	}
+	localStorage.setItem("todoLists", JSON.stringify(todoLists));
 	localStorage.setItem("todoItems", JSON.stringify(todoItems));
 	renderList();
 }
@@ -109,6 +119,13 @@ function deleteItem(e) {
 	let index = todoItems.indexOf(item);
 	todoItems.splice(index, 1);
 	localStorage.setItem("todoItems", JSON.stringify(todoItems));
+	
+	if (item.finish == false) {
+		// 事项所在列表的未完成数减一
+		listName = todoLists.find(list => list.id == item.listid);
+		listName.num--;
+		localStorage.setItem("todoLists", JSON.stringify(todoLists));
+	}
 	renderList();
 }
 
@@ -134,6 +151,11 @@ function addItem() {
 	todoItems.push(itemObj);
 	document.getElementById("add-item").value = "";
 	localStorage.setItem("todoItems", JSON.stringify(todoItems));
+	
+	listName = todoLists.find(list => list.id == listid);
+	listName.num++;
+	localStorage.setItem("todoLists", JSON.stringify(todoLists));
+	
 	renderList();
 }
 
@@ -150,6 +172,7 @@ function deleteFinish() {
 		return item.finish == false || !item.listid == listid;
 	})
 	localStorage.setItem("todoItems", JSON.stringify(todoItems));
+	
 	renderList();
 }
 
@@ -176,27 +199,24 @@ function addImportant(e) {
 
 // 重新绘制列表
 function renderList() {
-	if (renderSpecialList()) {
-		return;
+	if (!renderSpecialList()) {
+		const itemView = document.querySelector('.items');
+		var listid = getParams("listid");
+		
+		notfinish = todoItems.filter(item => item.listid == listid && item.finish === false);
+		notfinish.sort(itemCompare("endtime"));
+		
+		finish = todoItems.filter(item => item.listid == listid && item.finish === true);
+		finish.sort(itemCompare("endtime"));
+		
+		itemView.innerHTML = notfinish.map(obj => itemGenerator(obj)).join('')
+								+ finish.map(obj => itemGenerator(obj)).join('');
+		
+		var listSize = notfinish.length;
+		document.getElementById("list-num").innerHTML = listSize + " items left";
 	}
-	
-	refreshList();
-	const itemView = document.querySelector('.items');
-	var listid = getParams("listid");
-	
-	notfinish = todoItems.filter(item => item.listid == listid && item.finish === false);
-	notfinish.sort(itemCompare("endtime"));
-	
-	finish = todoItems.filter(item => item.listid == listid && item.finish === true);
-	finish.sort(itemCompare("endtime"));
-	
-	itemView.innerHTML = notfinish.map(obj => itemGenerator(obj)).join('')
-							+ finish.map(obj => itemGenerator(obj)).join('');
-	
 	checkFinish();
 	addListener();
-	var listSize = notfinish.length;
-	document.getElementById("list-num").innerHTML = listSize + " items left";
 }
 
 // 更新分类列表的localStorage
@@ -209,10 +229,35 @@ function refreshList() {
 }
 
 function renderSpecialList() {
+	const itemView = document.querySelector('.items');
 	var listid = getParams("listid");
-	
+
 	if (listid == 2) {
-		console.log(123213124123123);
+		let importantItems = todoItems.filter(item => item.important === true);
+		let notfinish = importantItems.filter(item => item.finish === false);
+		notfinish.sort(itemCompare("endtime"));
+		let finished = importantItems.filter(item => item.finish === true);
+		finished.sort(itemCompare("endtime"));
+		
+		itemView.innerHTML = notfinish.map(obj => itemGenerator(obj)).join('')
+								+ finished.map(obj => itemGenerator(obj)).join('');
+		document.getElementById("list-num").innerHTML = notfinish.length + " items left";
+		
+		var footer = document.getElementsByClassName("footer");
+		footer[0].style.display = "none";
+		
+		return true;
+	}
+	if (listid == 3) {
+		let finishItems = todoItems.filter(item => item.finish == true);
+		itemView.innerHTML = finishItems.map(obj => itemGenerator(obj)).join('');
+		
+		var footer = document.getElementsByClassName("footer");
+		footer[0].style.display = "none";
+		
+		var listNum = document.getElementById("list-num");
+		listNum.style.display = "none";
+		
 		return true;
 	}
 	return false;

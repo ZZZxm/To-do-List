@@ -25,12 +25,14 @@ h1 {
 	margin: 0.625rem;
 	font-family: "Georgia";
 	font-size: 1.5rem;
+	transition: .4s;
 }
 
 #list-num {
 	font-size: 0.875rem;
 	margin-bottom: 0.625rem;
 	font-family: "Book Antiqua";
+    transition: .4s;
 }
 
 .items {
@@ -38,6 +40,7 @@ h1 {
 	margin: 0 auto;
 	height: 11rem;
 	overflow: auto;
+    transition: .4s;
 }
 
 .item {
