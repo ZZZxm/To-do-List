@@ -255,7 +255,8 @@ function renderList() {
 		var listSize = notfinish.length;
 		document.getElementById("list-num").innerHTML = listSize + " items left";
 	}
-	checkFinish();
+	checkIcon();
+	checkEndtime();
 	addListener();
 }
 
@@ -334,14 +335,14 @@ function itemGenerator(obj) {
 		<div class="del-div">
 			<img src="img/delete.png" class="icon" id="del-icon">
 		</div>
-		<div id="end-date">
+		<div class="end-date">
 			End date: ${obj.endtime}
 		</div>
 	</div>
 	`;
 }
 
-function checkFinish() {
+function checkIcon() {
 	var items = document.getElementsByClassName("item");
 	for (i = 0; i < items.length; i++) {
 		if (items[i].getAttribute("finish") == "true") {
@@ -355,6 +356,22 @@ function checkFinish() {
 		if (items[i].getAttribute("important") == "true") {
 			let iconStar = items[i].getElementsByClassName("star-div")[0].getElementsByTagName("img");
 			iconStar[0].setAttribute("src", "img/star-full64.png");
+		}
+	}
+}
+
+// 确认是否已过期
+function checkEndtime() {
+	var endDate = document.getElementsByClassName("end-date");
+	var today = new Date();
+	for (i = 0; i < endDate.length; i++) {
+		par = endDate[i].parentNode;
+		//console.log(par);
+		item = todoItems.find(item => item.id == par.id);
+		let time = new Date(Date.parse(item.endtime.replace(/-/g,"/")));
+		//console.log(item.endtime);
+		if (time < today && item.finish == false) {
+			endDate[i].style.color = "hotpink";
 		}
 	}
 }
