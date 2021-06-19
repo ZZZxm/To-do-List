@@ -45,6 +45,14 @@ document.ready(function() {
 	// 按钮添加列表事件
 	document.querySelector('#add-btn')
 		.addEventListener('click', addList);
+		
+	document.querySelector('#add-list')
+		.addEventListener('keyup', function(event) {
+			event.preventDefault();
+			if (event.keyCode === 13) {
+				document.getElementById('add-btn').click();
+			}
+		})
 	
 	document.querySelector('#del-all-icon')
 		.addEventListener('click', deleteFinish);

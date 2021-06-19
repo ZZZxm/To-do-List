@@ -79,6 +79,17 @@ h1 {
 	width: 59%;
 }
 
+.edit-item {
+	font-family: "Book Antiqua";
+	font-size: 0.8rem;
+	margin-left: 0.8rem;
+	width: 40%;
+	margin-right: 2.58rem;
+	background-color: transparent;
+	color: white;
+	border: 1px solid #d8d8d8;
+}
+
 .item-name-finish {
 	text-decoration: line-through;
 }
@@ -178,4 +189,6 @@ h1 {
 	vertical-align: middle;
 }
 
-
+.edit-item {
+	display: none;
+}

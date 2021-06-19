@@ -55,6 +55,14 @@ document.ready(function() {
 	// 添加item按钮
 	document.querySelector('#add-btn')
 		.addEventListener('click', addItem);
+	
+	document.querySelector('#add-item')
+		.addEventListener('keyup', function(event) {
+			event.preventDefault();
+			if (event.keyCode === 13) {
+				document.getElementById('add-btn').click();
+			}
+		})
 		
 	// 删除已完成
 	document.querySelector('#del-all-icon')
@@ -67,13 +75,32 @@ function addListener() {
 	finishDiv.forEach(d => d.addEventListener('click', itemStatusChange))
 	
 	var nameDiv = document.querySelectorAll('.item-name');
-	nameDiv.forEach(d => d.addEventListener('click', itemStatusChange));
+	// nameDiv.forEach(d => d.addEventListener('click', itemStatusChange));
+	nameDiv.forEach(d => d.addEventListener('click', editItem));
 	
 	var delDiv = document.querySelectorAll('.del-div');
 	delDiv.forEach(d => d.addEventListener('click', deleteItem));
 	
 	var starDiv = document.querySelectorAll('.star-div');
 	starDiv.forEach(d => d.addEventListener('click', addImportant));
+	
+	var inputBox = document.querySelectorAll('.edit-item');
+	for (i = 0; i < inputBox.length; i++) {
+		inputBox[i].onblur = function(e) {
+			
+			let parNode = e.currentTarget.parentNode;
+			let input = parNode.getElementsByClassName("edit-item");
+			let nameDiv = parNode.getElementsByClassName("item-name");
+			input[0].style.display = "none";
+			nameDiv[0].style.display = "inline-block";
+			nameDiv[0].innerHTML = input[0].value;
+			
+			let itemid = parNode.getAttribute("id");
+			let item = todoItems.find(item => item.id == itemid);
+			item.name = input[0].value;
+			localStorage.setItem("todoItems", JSON.stringify(todoItems));
+		}
+	}
 }
 
 // 改变todo事项状态
@@ -158,6 +185,19 @@ function addItem() {
 	
 	renderList();
 }
+
+// 编辑todo事项
+function editItem(e) {
+	e.stopPropagation();
+	
+	let parNode = e.currentTarget.parentNode;
+	let input = parNode.getElementsByClassName("edit-item");
+	let nameDiv = parNode.getElementsByClassName("item-name");
+	input[0].style.display = "inline-block";
+	nameDiv[0].style.display = "none";
+	input[0].value = nameDiv[0].innerText.replace(/^\s+|\s+$/g, '');
+}
+
 
 // 删除所有已完成的事项
 function deleteFinish() {
@@ -287,6 +327,7 @@ function itemGenerator(obj) {
 		<div class="item-name">
 			${obj.name}
 		</div>
+		<input type="text" value=" " class="edit-item" />
 		<div class="star-div">
 			<img src="img/star-empty64.png" class="icon" id="star-icon">
 		</div>

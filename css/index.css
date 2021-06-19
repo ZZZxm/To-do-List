@@ -137,3 +137,7 @@ body {
 	height: 9.0rem;
 	overflow: auto;	
 }
+
+.edit-item {
+	display: none;
+}
