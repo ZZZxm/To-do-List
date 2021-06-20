@@ -37,12 +37,17 @@ function getParams(key) {
 };
 
 document.ready(function() {
-    let listName = getParams("listname");
-    console.log(listName);
     let title = document.querySelector("h1");
     console.log(title);
-    title.innerText = listName;
+	
+	var listName = getParams("listname");
+	if (listName != "Important") {
+		listName = todoLists.find(list => list.id == getParams("listid")).name;		
+	}
+    title.innerHTML = listName;
     title.style = "display=block;";
+	
+	document.querySelector("#data-sel").valueAsDate = new Date();
 	
 	// 返回初始界面
 	var ret = document.getElementById("ret-icon");
@@ -364,6 +369,7 @@ function checkIcon() {
 function checkEndtime() {
 	var endDate = document.getElementsByClassName("end-date");
 	var today = new Date();
+	today.setDate(new Date().getDate() - 1);
 	for (i = 0; i < endDate.length; i++) {
 		par = endDate[i].parentNode;
 		//console.log(par);
