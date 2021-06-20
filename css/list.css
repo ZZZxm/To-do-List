@@ -53,7 +53,10 @@ h1 {
 	flex-wrap: wrap;
 	align-items: center;
 	padding-left: 0.625rem;
+	padding-bottom: 0.3rem;
 	margin-bottom: 0.8125rem;
+	border:2px solid white;
+	border-radius:25px;
 }
 
 .fin-div {
@@ -112,6 +115,13 @@ h1 {
 	font-size: 0.55rem;
 	font-family: "Book Antiqua";
 	padding-left: 1.85rem;
+}
+
+.list-name {
+	font-size: 0.55rem;
+	font-family: "Book Antiqua";
+	padding-left: 1.85rem;
+	padding-right: 5rem;
 }
 /* 
 #data-sel {

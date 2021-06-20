@@ -104,6 +104,7 @@ function addListener() {
 			let item = todoItems.find(item => item.id == itemid);
 			item.name = input[0].value;
 			localStorage.setItem("todoItems", JSON.stringify(todoItems));
+			renderList();
 		}
 	}
 }
@@ -170,11 +171,13 @@ function addItem() {
 	
 	let time = document.getElementById("data-sel").value;
 	let listid = getParams("listid");
+	let listName = todoLists.find(list => list.id == listid).name;
 	
 	let itemObj = {
 		id: getUniqueId(),
 		name: item,
 		listid: listid,
+		listname: listName,
 		endtime: time,
 		finish: false,
 		important: false
@@ -285,8 +288,8 @@ function renderSpecialList() {
 		let finished = importantItems.filter(item => item.finish === true);
 		finished.sort(itemCompare("endtime"));
 		
-		itemView.innerHTML = notfinish.map(obj => itemGenerator(obj)).join('')
-								+ finished.map(obj => itemGenerator(obj)).join('');
+		itemView.innerHTML = notfinish.map(obj => itemGenerator_Imp(obj)).join('')
+								+ finished.map(obj => itemGenerator_Imp(obj)).join('');
 		document.getElementById("list-num").innerHTML = notfinish.length + " items left";
 		
 		var footer = document.getElementsByClassName("footer");
@@ -346,6 +349,34 @@ function itemGenerator(obj) {
 	</div>
 	`;
 }
+
+function itemGenerator_Imp(obj) {
+	return `
+	<div class="item" id=${obj.id} name=${obj.name} finish=${obj.finish}
+			important=${obj.important}>
+		<div class="fin-div">
+			<img src="img/finish-no.png">
+		</div>
+		<div class="item-name">
+			${obj.name}
+		</div>
+		<input type="text" value=" " class="edit-item" />
+		<div class="star-div">
+			<img src="img/star-empty64.png" class="icon" id="star-icon">
+		</div>
+		<div class="del-div">
+			<img src="img/delete.png" class="icon" id="del-icon">
+		</div>
+		<div class="end-date">
+			End date: ${obj.endtime}
+		</div>
+		<div class="list-name">
+			From: ${obj.listname}
+		</div>
+	</div>
+	`;
+}
+
 
 function checkIcon() {
 	var items = document.getElementsByClassName("item");
