@@ -41,7 +41,7 @@ document.ready(function() {
     console.log(title);
 	
 	var listName = getParams("listname");
-	if (listName != "Important") {
+	if (listName != "Important" && listName != "Finished") {
 		listName = todoLists.find(list => list.id == getParams("listid")).name;		
 	}
     title.innerHTML = listName;
@@ -220,7 +220,6 @@ function deleteFinish() {
 		return item.finish == false || !item.listid == listid;
 	})
 	localStorage.setItem("todoItems", JSON.stringify(todoItems));
-	
 	renderList();
 }
 
@@ -305,7 +304,7 @@ function renderSpecialList() {
 		footer[0].style.display = "none";
 		
 		var listNum = document.getElementById("list-num");
-		listNum.style.display = "none";
+		listNum.innerHTML = "Totally " + finishItems.length + " tasks finished"
 		
 		return true;
 	}
