@@ -27,6 +27,7 @@
 * 添加todo列表
 * 删除todo列表
 * 将todo事项添加到Important
+* 只显示已完成todo事项
 * 编辑单条todo事项（原地编辑）
 * 设定todo事项的到期日
 
