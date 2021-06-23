@@ -35,6 +35,7 @@ body {
 	border-bottom: 0.0625rem solid rgba(255, 255, 255, 0.3);
 }
 
+
 .list {
 	font-size: 0.8rem;
 	font-family: "Book Antiqua";	
@@ -134,7 +135,7 @@ body {
 
 #self-list {
 	margin-top: 0.3125rem;
-	height: 9.0rem;
+	height: 45vh;
 	overflow: auto;	
 }
 

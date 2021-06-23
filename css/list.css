@@ -28,6 +28,29 @@ h1 {
 	transition: .4s;
 }
 
+.not-show-com {
+	display: inline-block;
+	font-size: 0.53rem;
+	vertical-align: middle;
+	margin-left: 5.2rem;
+	border: 1px solid #d8d8d8;
+	border-radius: 1rem;
+	padding: 0.3rem;
+	font-family: "Book Antiqua";
+}
+
+.show-com {
+	display: inline-block;
+	font-size: 0.53rem;
+	vertical-align: middle;
+	margin-left: 5.2rem;
+	border: 1px solid #d8d8d8;
+	border-radius: 1rem;
+	padding: 0.3rem;
+	font-family: "Book Antiqua";
+	color: hotpink;
+}
+
 #list-num {
 	font-size: 0.875rem;
 	margin-bottom: 0.625rem;

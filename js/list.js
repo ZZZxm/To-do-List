@@ -69,10 +69,24 @@ document.ready(function() {
 			}
 		})
 		
+	document.querySelector('#show-btn')
+		.addEventListener('click', changeShowComplete)
+		
 	// 删除已完成
 	document.querySelector('#del-all-icon')
 		.addEventListener('click', deleteFinish);
 })
+
+function changeShowComplete(e) {
+	var btn = e.currentTarget;
+	if (btn.getAttribute('class') == "show-com") {
+		btn.setAttribute('class', 'not-show-com');
+	} else {
+		btn.setAttribute('class', 'show-com');
+	}
+	renderList();
+}
+
 
 // 初始化每项事项的图标按钮事件
 function addListener() {
@@ -256,6 +270,11 @@ function renderList() {
 		finish = todoItems.filter(item => item.listid == listid && item.finish === true);
 		finish.sort(itemCompare("endtime"));
 		
+		if (document.querySelector('#show-btn').getAttribute('class') == 'not-show-com') {
+			notfinish = notfinish.filter(item => item.finish === false);
+			finish = finish.filter(item => item.finish === false);
+		}
+		
 		itemView.innerHTML = notfinish.map(obj => itemGenerator(obj)).join('')
 								+ finish.map(obj => itemGenerator(obj)).join('');
 		
@@ -287,6 +306,11 @@ function renderSpecialList() {
 		let finished = importantItems.filter(item => item.finish === true);
 		finished.sort(itemCompare("endtime"));
 		
+		if (document.querySelector('#show-btn').getAttribute('class') == 'not-show-com') {
+			notfinish = notfinish.filter(item => item.finish === false);
+			finished = finished.filter(item => item.finish === false);
+		}
+		
 		itemView.innerHTML = notfinish.map(obj => itemGenerator_Imp(obj)).join('')
 								+ finished.map(obj => itemGenerator_Imp(obj)).join('');
 		document.getElementById("list-num").innerHTML = notfinish.length + " items left";
@@ -302,6 +326,8 @@ function renderSpecialList() {
 		
 		var footer = document.getElementsByClassName("footer");
 		footer[0].style.display = "none";
+		
+		document.querySelector('#show-btn').style.display = "none";
 		
 		var listNum = document.getElementById("list-num");
 		listNum.innerHTML = "Totally " + finishItems.length + " tasks finished"
