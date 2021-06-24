@@ -32,7 +32,6 @@ h1 {
 	display: inline-block;
 	font-size: 0.53rem;
 	vertical-align: middle;
-	margin-left: 5.2rem;
 	border: 1px solid #d8d8d8;
 	border-radius: 1rem;
 	padding: 0.3rem;
@@ -43,12 +42,15 @@ h1 {
 	display: inline-block;
 	font-size: 0.53rem;
 	vertical-align: middle;
-	margin-left: 5.2rem;
 	border: 1px solid #d8d8d8;
 	border-radius: 1rem;
 	padding: 0.3rem;
 	font-family: "Book Antiqua";
 	color: hotpink;
+}
+
+#com-all-btn {
+	margin-left: 1.2rem;
 }
 
 #list-num {

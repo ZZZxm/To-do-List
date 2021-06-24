@@ -70,7 +70,10 @@ document.ready(function() {
 		})
 		
 	document.querySelector('#show-btn')
-		.addEventListener('click', changeShowComplete)
+		.addEventListener('click', changeShowComplete);
+	
+	document.querySelector('#com-all-btn')
+		.addEventListener('click', completeAll);
 		
 	// 删除已完成
 	document.querySelector('#del-all-icon')
@@ -83,6 +86,21 @@ function changeShowComplete(e) {
 		btn.setAttribute('class', 'not-show-com');
 	} else {
 		btn.setAttribute('class', 'show-com');
+	}
+	renderList();
+}
+
+function completeAll() {
+	let listid = getParams("listid");
+	var notfinish;
+	if (listid == 2) {
+		notfinish = todoItems.filter(item => item.finish === false);
+	} else {
+		notfinish = todoItems.filter(item => item.listid == listid && item.finish === false);
+	}
+	
+	for (i = 0; i < notfinish.length; i++) {
+		notfinish[i].finish = true;
 	}
 	renderList();
 }
@@ -328,6 +346,7 @@ function renderSpecialList() {
 		footer[0].style.display = "none";
 		
 		document.querySelector('#show-btn').style.display = "none";
+		document.querySelector('#com-all-btn').style.display = "none";
 		
 		var listNum = document.getElementById("list-num");
 		listNum.innerHTML = "Totally " + finishItems.length + " tasks finished"
