@@ -80,6 +80,7 @@ document.ready(function() {
 		.addEventListener('click', deleteFinish);
 })
 
+// 展示/不展示已完成todo事项
 function changeShowComplete(e) {
 	var btn = e.currentTarget;
 	if (btn.getAttribute('class') == "show-com") {
@@ -90,6 +91,7 @@ function changeShowComplete(e) {
 	renderList();
 }
 
+// 完成所有todo事项
 function completeAll() {
 	let listid = getParams("listid");
 	var notfinish;
@@ -276,7 +278,7 @@ function addImportant(e) {
 }
 
 
-// 重新绘制列表
+// 绘制列表
 function renderList() {
 	if (!renderSpecialList()) {
 		const itemView = document.querySelector('.items');
@@ -313,6 +315,7 @@ function refreshList() {
 	localStorage.setItem("todoLists", JSON.stringify(todoLists));
 }
 
+// 绘制特殊list列表
 function renderSpecialList() {
 	const itemView = document.querySelector('.items');
 	var listid = getParams("listid");
@@ -356,6 +359,7 @@ function renderSpecialList() {
 	return false;
 }
 
+// 排序todo事项比较
 function itemCompare(attr) {
 	return function(obj1, obj2) {
 		var val1 = obj1[attr];
@@ -370,6 +374,7 @@ function itemCompare(attr) {
 	}
 }
 
+// 生成todo事项
 function itemGenerator(obj) {
 	return `
 	<div class="item" id=${obj.id} name=${obj.name} finish=${obj.finish}
@@ -394,6 +399,7 @@ function itemGenerator(obj) {
 	`;
 }
 
+// Important列表生成todo事项
 function itemGenerator_Imp(obj) {
 	return `
 	<div class="item" id=${obj.id} name=${obj.name} finish=${obj.finish}
@@ -421,7 +427,7 @@ function itemGenerator_Imp(obj) {
 	`;
 }
 
-
+// 设置图标
 function checkIcon() {
 	var items = document.getElementsByClassName("item");
 	for (i = 0; i < items.length; i++) {
