@@ -105,9 +105,10 @@ function completeAll() {
 		notfinish[i].finish = true;
 	}
 	
-	listName = todoLists.find(list => list.id == finish.listid);
+	listName = todoLists.find(list => list.id == listid);
 	listName.num = 0;
 	localStorage.setItem("todoLists", JSON.stringify(todoLists));
+	localStorage.setItem("todoItems", JSON.stringify(todoItems));
 	renderList();
 }
 
