@@ -107,6 +107,7 @@ function completeAll() {
 	
 	listName = todoLists.find(list => list.id == listid);
 	listName.num = 0;
+	
 	localStorage.setItem("todoLists", JSON.stringify(todoLists));
 	localStorage.setItem("todoItems", JSON.stringify(todoItems));
 	renderList();
@@ -336,6 +337,7 @@ function renderSpecialList() {
 			notfinish = notfinish.filter(item => item.finish === false);
 			finished = finished.filter(item => item.finish === false);
 		}
+		document.querySelector('#com-all-btn').style.visibility = "hidden";
 		
 		itemView.innerHTML = notfinish.map(obj => itemGenerator_Imp(obj)).join('')
 								+ finished.map(obj => itemGenerator_Imp(obj)).join('');
